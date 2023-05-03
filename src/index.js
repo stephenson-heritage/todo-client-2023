@@ -44,10 +44,24 @@ let loadTodo = () => {
 				let id = this.parentElement.dataset.tdid;
 				let complete = (this.checked);
 
-				toDoApi.updateTodoItem(id, complete, (data) => { });
+				toDoApi.setTodoItemCompleteStatus(id, complete, (data) => { });
 			});
 
 		}
+
+		let btnsSave = document.getElementsByClassName("save");
+
+		for (let i = 0; i < btnsSave.length; i++) {
+			btnsSave[i].addEventListener("click", function () {
+				let id = this.parentElement.dataset.tdid;
+				let task = this.parentElement.getElementsByClassName("task")[0].value;
+				let complete = this.parentElement.getElementsByClassName("iscomplete")[0].checked;
+
+				toDoApi.updateTodoItem(id, task, complete, (data) => { });
+			});
+
+		}
+
 
 
 

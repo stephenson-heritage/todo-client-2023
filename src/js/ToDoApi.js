@@ -31,9 +31,31 @@ export default {
         let jsonPromise = fetchPromise.then(response => response.json()); // takes fetch respose, asks to ==> json
         jsonPromise.then(json => { callback(json) }); // when json'd send to callback function
     },
-    updateTodoItem: function (id, complete, callback) {
-        let url = this.baseUrl + `/${id}/${complete}`;
+    updateTodoItem: function (id, description, complete, callback) {
+        let url = this.baseUrl + `/${id}`;
 
+        let payload = {
+            "task": description,
+            "todoItemId": id,
+            "isComplete": complete
+        };
+
+        let fetchPromise = fetch(url, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        let jsonPromise = fetchPromise.then(response => response.json()); // takes fetch respose, asks to ==> json
+        jsonPromise.then(json => { callback(json) }); // when json'd send to callback function
+
+    },
+    setTodoItemCompleteStatus: function (id, complete, callback) {
+        let url = this.baseUrl + `/${id}/${complete}`;
+        // https://localhost:7213/api/todoitems/1/true
         let payload = {
             "isComplete": complete,
             "id": id

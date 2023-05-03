@@ -16,8 +16,9 @@
 			<input class="iscomplete" type="checkbox">
 		{{/if}}
 
-		<span class="task">{{{task}}}</span>
-
+		<input type="text" class="task" value="{{{task}}}" />
+		<button class="save">Save</button>
+		<button class="delete">Delete</button>
 	</li>
 {{/each}}
 </ul>
